@@ -80,6 +80,18 @@ namespace ConsoleAppHackathon
 
         public void DeletRowTimeT_FlightNumber(int FlightNumber)
         {
+            try
+            {
+                string sql = "DELETE FROM `Timetable` WHERE FlightNumber =" + FlightNumber;
+                objComand = new MySqlCommand(sql, obj);
+                objComand.ExecuteScalar();
+
+                Console.WriteLine("Note is delete");
+            }
+            catch
+            {
+                Console.WriteLine("Error. The add request was not executed");
+            }
 
         }
     }
