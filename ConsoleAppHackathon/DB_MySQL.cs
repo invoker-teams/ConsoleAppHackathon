@@ -105,7 +105,7 @@ namespace ConsoleAppHackathon
 
                 Console.WriteLine("Note is delete");
             }
-            catch
+            catch 
             {
                 Console.WriteLine("Error. The add request was not executed");
             }
