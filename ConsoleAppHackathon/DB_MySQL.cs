@@ -11,7 +11,11 @@ namespace ConsoleAppHackathon
         string database;
         string username;
         string password;
+
+        //Объект для подключения к БД
         MySqlConnection obj;
+        //Объект для выполнения SQL-запроса
+        MySqlCommand objComand;
 
         public DB_MySQL(string Host, int Port, string Database, string Username, string Password)
         {
@@ -40,6 +44,22 @@ namespace ConsoleAppHackathon
         public void statusOpenSession()
         {
             Console.WriteLine("Server is alive ? " + obj.Ping());
+        }
+
+        public void CreatingNewRecordTimetable(DateTime FlightDate, TimeSpan ScheduledTime, int AirlineCode, int FlightNumber, string FlagArrivalDeparture, string TypeAircraft, string AParking, string ParkingSector, string NameAirline)
+        {
+            try
+            {
+                // запрос
+                string sql = "INSERT INTO `Timetable`  (`FlightDate`, `ScheduledTime`, `AirlineCode`, `FlightNumber`, `FlagArrivalDeparture`, `TypeAircraft`, `AParking`,`ParkingSector`,`NameAirline`) VALUES ('" + FlightDate + "', '" + ScheduledTime + "', '" + AirlineCode + "', '" + FlightNumber + "', '" + FlagArrivalDeparture + "', '" + TypeAircraft + "', '" + AParking + "', '" + ParkingSector + "', '" + NameAirline + "')";
+                MySqlCommand command = new MySqlCommand(sql, obj);
+                // выполняем запрос 
+                command.ExecuteScalar();
+            }
+            catch
+            {
+                Console.WriteLine("Error. The add request was not executed");
+            }
         }
     }
 }
