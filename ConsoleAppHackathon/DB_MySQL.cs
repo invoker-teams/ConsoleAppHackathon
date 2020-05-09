@@ -94,5 +94,22 @@ namespace ConsoleAppHackathon
             }
 
         }
+
+        public void getTimeTimetable(int FlightNumber)
+        {
+            try
+            {
+                string sql = "SELECT * FROM `Timetable` WHERE FlightNumber =" + FlightNumber;
+                objComand = new MySqlCommand(sql, obj);
+                objComand.ExecuteScalar();
+
+                Console.WriteLine("Note is delete");
+            }
+            catch
+            {
+                Console.WriteLine("Error. The add request was not executed");
+            }
+
+        }
     }
 }
