@@ -21,9 +21,9 @@ namespace ConsoleAppHackathon
             objSQL.statusOpenSession();
 
             DateTime dt = new DateTime(2000, 2, 3, 10, 20, 30);
-            objSQL.CreatingNewRecordTimetable(dt.Date, dt.TimeOfDay, 721, 555, "d", "772", "109w", "Terminal F", "Aeroflot");
+            //objSQL.CreatingNewRowTimetable(dt.Date, dt.TimeOfDay, 721, 555, "d", "772", "109w", "Terminal F", "Aeroflot");
 
-
+            objSQL.DeletRow_id(3, "Timetable");
             Console.ReadKey();
         }
     }

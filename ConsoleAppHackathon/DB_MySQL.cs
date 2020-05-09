@@ -46,20 +46,41 @@ namespace ConsoleAppHackathon
             Console.WriteLine("Server is alive ? " + obj.Ping());
         }
 
-        public void CreatingNewRecordTimetable(DateTime FlightDate, TimeSpan ScheduledTime, int AirlineCode, int FlightNumber, string FlagArrivalDeparture, string TypeAircraft, string AParking, string ParkingSector, string NameAirline)
+        public void CreatingNewRowTimetable(DateTime FlightDate, TimeSpan ScheduledTime, int AirlineCode, int FlightNumber, string FlagArrivalDeparture, string TypeAircraft, string AParking, string ParkingSector, string NameAirline)
         {
             try
             {
-                // запрос
                 string sql = "INSERT INTO `Timetable`  (`FlightDate`, `ScheduledTime`, `AirlineCode`, `FlightNumber`, `FlagArrivalDeparture`, `TypeAircraft`, `AParking`,`ParkingSector`,`NameAirline`) VALUES ('" + FlightDate + "', '" + ScheduledTime + "', '" + AirlineCode + "', '" + FlightNumber + "', '" + FlagArrivalDeparture + "', '" + TypeAircraft + "', '" + AParking + "', '" + ParkingSector + "', '" + NameAirline + "')";
-                MySqlCommand command = new MySqlCommand(sql, obj);
-                // выполняем запрос 
-                command.ExecuteScalar();
+                objComand = new MySqlCommand(sql, obj);
+                objComand.ExecuteScalar();
+
+                Console.WriteLine("Create new note");
             }
             catch
             {
                 Console.WriteLine("Error. The add request was not executed");
             }
+        }
+
+        public void DeletRow_id(int id, string NameTable)
+        {
+            try
+            {
+                string sql = "DELETE FROM `" + NameTable + "` WHERE id =" + id;
+                objComand = new MySqlCommand(sql, obj);
+                objComand.ExecuteScalar();
+
+                Console.WriteLine("Note is delete");
+            }
+            catch
+            {
+                Console.WriteLine("Error. The add request was not executed");
+            }
+        }
+
+        public void DeletRowTimeT_FlightNumber(int FlightNumber)
+        {
+
         }
     }
 }
