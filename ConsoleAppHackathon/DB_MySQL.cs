@@ -1,5 +1,6 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace ConsoleAppHackathon
 {
@@ -16,6 +17,15 @@ namespace ConsoleAppHackathon
         MySqlConnection obj;
         //Объект для выполнения SQL-запроса
         MySqlCommand objComand;
+
+        /*
+         * openSessionMySQL - открываем соединение с бд
+         * statusOpenSession - проверка подключения к бд
+         * CreatingNewRowTimetable - отдельный метод для внесения данных в таблицу с расписанием
+         * DeletRow_id - метод удаляющий данные в любой таблице по id
+         * DeletRowTimeT_FlightNumber - удаляет запись из таблицы с расписанием по номеру рейса
+         * getTimeTimetable - получить расписание. НЕ ДОДЕЛАЛ!!!
+         */
 
         public DB_MySQL(string Host, int Port, string Database, string Username, string Password)
         {
@@ -97,19 +107,27 @@ namespace ConsoleAppHackathon
 
         public void getTimeTimetable(int FlightNumber)
         {
+            var result = new List<string>();
             try
             {
-                string sql = "SELECT * FROM `Timetable` WHERE FlightNumber =" + FlightNumber;
+                string sql = "SELECT `AirlineCode` FROM `Timetable` WHERE FlightNumber =" + FlightNumber;
                 objComand = new MySqlCommand(sql, obj);
-                objComand.ExecuteScalar();
 
-                Console.WriteLine("Note is delete");
+                //Console.WriteLine(objComand.ExecuteScalar().ToString());
+                var reader = objComand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result.Add(reader.GetString(0));
+                }
+                reader.Close();
+
+                string[] a = result.ToArray();
             }
-            catch 
+            catch (Exception ex)
             {
-                Console.WriteLine("Error. The add request was not executed");
+                Console.WriteLine("Error. The add request was not executed = " + ex.Message);
             }
-
         }
     }
 }
