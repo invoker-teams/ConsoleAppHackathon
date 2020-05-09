@@ -5,37 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace ConsoleApplication1
+namespace ConsoleAppHackathon
 {
    
     class Program
-    {          
-
+    {
+        
         static void Main(string[] args)
         {
-            string host = "sql7.freesqldatabase.com";
-            int port = 3306;
-            string database = "sql7338923";
-            string username = "sql7338923";
-            string password = "bc9vSYmu5u";
 
-            try
-            {
-                String connString = "Server=" + host + ";Database=" + database
-                + ";port=" + port + ";User Id=" + username + ";password=" + password;
-                MySqlConnection conn = new MySqlConnection(connString);
+            DB_MySQL objSQL = new DB_MySQL("sql7.freesqldatabase.com", 3306, "sql7338923", "sql7338923", "bc9vSYmu5u");
 
-               conn.Open();
-                Console.WriteLine(conn.Ping());
-            }
-            catch
-            {
-                Console.WriteLine("Error ");
-            }
 
-            
+            objSQL.openSessionMySQL();
 
-            Console.ReadLine();
+            objSQL.statusOpenSession();
+
+            Console.ReadKey();
         }
     }
 }
